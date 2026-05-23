@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Translator 🍽️</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: #1e1e1e;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+            border: 1px solid #333;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            font-size: 2rem;
+            color: #ffffff;
+        }
+
+        p {
+            color: #aaa;
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+        }
+
+        .file-input-wrapper {
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            background: #2d2d2d;
+            padding: 10px;
+            border-radius: 6px;
+            width: 90%;
+            color: #fff;
+            border: 1px dashed #555;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        input[type="file"]:hover {
+            border-color: #00ff00;
+            background: #333;
+        }
+
+        button {
+            background-color: #00ff00;
+            color: #000000;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 255, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        button:hover {
+            background-color: #00cc00;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 255, 0, 0.4);
+        }
+
+        /* DIV DO HISTÓRICO VISUAL */
+        .historico-section {
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            text-align: left;
+        }
+
+        .historico-section h3 {
+            font-size: 1.1rem;
+            color: #ff9900;
+            margin-bottom: 15px;
+        }
+
+        .lista-historico {
+            max-height: 150px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .item-historico {
+            display: flex;
+            align-items: center;
+            background: #2a2a2a;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            border: 1px solid #444;
+        }
+
+        .item-historico a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 0.85rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 100%;
+        }
+
+        .item-historico a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Menu Translator 🍽️</h1>
+        <p>Envie a foto do cardápio para extrair os pratos e valores traduzidos automaticamente.</p>
+        
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <div class="file-input-wrapper">
+                <input type="file" name="arquivo_cardapio" accept="image/*" required>
+            </div>
+            <button type="submit">Traduzir Cardápio ➔</button>
+        </form>
+
+        <div class="historico-section">
+            <h3>🗂️ Últimos Cardápios Enviados:</h3>
+            <div class="lista-historico">
+                {% if historico %}
+                    {% for item in historico %}
+                        <div class="item-historico">
+                            <span>🖼️&nbsp;</span>
+                            <a href="/static/{{ item }}" target="_blank">{{ item }}</a>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p style="font-size: 0.85rem; color: #666; margin: 0;">Nenhum cardápio no histórico ainda.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

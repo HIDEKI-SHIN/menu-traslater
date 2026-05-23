@@ -1,0 +1,9 @@
+# Ignorar ambiente virtual do Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Ignorar as fotos do histórico (para não encher seu GitHub de fotos de teste)
+static/*
+!static/.gitkeep
